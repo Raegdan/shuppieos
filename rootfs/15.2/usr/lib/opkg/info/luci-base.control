@@ -1,0 +1,8 @@
+Package: luci-base
+Version: git-15.126.50380-7a54785-1
+Depends: libc, lua, libuci-lua, luci-lib-nixio, luci-lib-ip, rpcd
+Source: feeds/luci/modules/luci-base
+Section: luci
+Architecture: brcm2708
+Installed-Size: 123645
+Description:  LuCI core libraries

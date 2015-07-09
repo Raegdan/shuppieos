@@ -1,0 +1,10 @@
+Package: kernel
+Version: 3.18.11-1-e9b38b6b41d7ed326501b9bc6a4229b0
+Depends: libc
+Source: package/kernel/linux
+License: GPLv2
+Section: sys
+Status: unknown hold not-installed
+Architecture: brcm2708
+Installed-Size: 105
+Description:  Virtual kernel package

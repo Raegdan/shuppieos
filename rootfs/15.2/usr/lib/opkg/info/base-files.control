@@ -1,0 +1,9 @@
+Package: base-files
+Version: 157-r45695
+Depends: libc, netifd, procd, jsonfilter, usign
+Source: package/base-files
+License: GPL-2.0
+Section: base
+Architecture: brcm2708
+Installed-Size: 28525
+Description:  This package contains a base filesystem and system scripts for OpenWrt.

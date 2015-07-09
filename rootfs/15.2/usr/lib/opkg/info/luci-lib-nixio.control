@@ -1,0 +1,8 @@
+Package: luci-lib-nixio
+Version: git-15.126.50380-7a54785-1
+Depends: libc, liblua
+Source: feeds/luci/libs/luci-lib-nixio
+Section: luci
+Architecture: brcm2708
+Installed-Size: 28748
+Description:  NIXIO POSIX library
