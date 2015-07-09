@@ -1,0 +1,19 @@
+#!/bin/sh
+
+## Restarts OpenVPN on status change of interfaces having "wan" (case-insens.) in their names.
+##
+## This is a part of the Project Shuppie.
+## License: GNU General Public License v3.
+## Copyright © Raegdan, 2015.
+## All rights reserved.
+## Email: raegdan-at-gmail-dot-com.
+
+[ "$ACTION" = ifup -o "$ACTION" = ifupdate -o "$ACTION" = ifdown ] || exit 0
+[ "$ACTION" = ifupdate -a -z "$IFUPDATE_ADDRESSES" -a -z "$IFUPDATE_DATA" ] && exit 0
+
+[ $( echo "$INTERFACE" | grep -i "wan" ) ] || exit 0
+/etc/init.d/openvpn enabled || exit 0
+
+logger -t openvpn "Restarting OpenVPN due to $ACTION of WAN iface $INTERFACE ($DEVICE)"
+/etc/init.d/openvpn restart
+

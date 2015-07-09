@@ -1,0 +1,4 @@
+/lib/wifi/wext.sh
+/etc/Wireless/RT2870STA/RT2870STA.dat
+/lib/modules/3.18.11/mt7601Usta.ko
+/etc/modules.d/mt7601

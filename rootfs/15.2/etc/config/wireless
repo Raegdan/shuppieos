@@ -1,0 +1,25 @@
+
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option channel '11'
+	option hwmode '11g'
+	## Path below almost surely will require adjustment on real device.
+	option path 'platform/bcm2708_usb/usb1/1-1/1-1.5/1-1.5.3/1-1.5.3:1.0'
+	option htmode 'HT20'
+	option country '00'
+	option txpower '15'
+
+config wifi-iface
+	option device 'radio0'
+	option mode 'ap'
+	option ssid 'ShuppieAP'
+	option network 'lan'
+	option wmm '0'
+	option encryption 'psk2+ccmp'
+	option key 'Ex@mplePa$$wd'
+
+config wifi-device 'ra0'
+	option type 'wext'
+	option hwmode '11g'
+	option disabled '0'
+	option channel '1'

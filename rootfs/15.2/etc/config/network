@@ -1,18 +1,31 @@
-# Copyright (C) 2006 OpenWrt.org
 
-config interface loopback
-	option ifname	lo
-	option proto	static
-	option ipaddr	127.0.0.1
-	option netmask	255.0.0.0
+config interface 'loopback'
+	option ifname 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
 
-config interface lan
-	option ifname	eth0
-	option type 	bridge
-	option proto	static
-	option ipaddr	192.168.1.1
-	option netmask	255.255.255.0
-	option ip6assign 60
+config interface 'lan'
+	option ifname 'eth0'
+	option type 'bridge'
+	option proto 'static'
+	option netmask '255.255.255.0'
+	option ipaddr '192.168.1.1'
 
-config globals globals
-	option ula_prefix auto
+config interface 'GSM_WAN'
+	option proto 'dhcp'
+	option ifname 'wwan0'
+	option delegate '0'
+	option metric '1000'
+
+config interface 'VPN_MAIN'
+	option proto 'static'
+	option ifname 'tun0'
+	option delegate '0'
+	option metric '10'
+
+config interface 'WIFI_WAN'
+	option proto 'dhcp'
+	option delegate '0'
+	option metric '100'
+

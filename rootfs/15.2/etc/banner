@@ -1,14 +1,19 @@
-  _______                     ________        __
- |       |.-----.-----.-----.|  |  |  |.----.|  |_
- |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
- |_______||   __|_____|__|__||________||__|  |____|
-          |__| W I R E L E S S   F R E E D O M
- -----------------------------------------------------
- CHAOS CALMER (15.05-rc1, r45695)
- -----------------------------------------------------
-  * 1 1/2 oz Gin            Shake with a glassful
-  * 1/4 oz Triple Sec       of broken ice and pour
-  * 3/4 oz Lime Juice       unstrained into a goblet.
-  * 1 1/2 oz Orange Juice
-  * 1 tsp. Grenadine Syrup
- -----------------------------------------------------
+        _____ __                      _         ____  _____
+       / ___// /_  __  ______  ____  (_)__     / __ \/ ___/
+       \__ \/ __ \/ / / / __ \/ __ \/ / _ \   / / / /\__ \
+      ___/ / / / / /_/ / /_/ / /_/ / /  __/  / /_/ /___/ /
+     /____/_/ /_/\__,_/ .___/ .___/_/\___/   \____//____/
+                     /_/   /_/
+ --------------------------------------------------------------
+       Version 15.2/2 codenamed CIVIL CONFRONTATION
+ --------------------------------------------------------------
+  Based on top of the marvellous distro for embedded hardware,
+  OpenWrt (https://openwrt.org/) revision r45695.
+
+  Components of pure OpenWrt keep their license terms intact.
+  Components developed by me for the Project Shuppie have
+  explicit notices in the source code and are subjects to GNU
+  General Public License v3 until notice states otherwise.
+
+  Copyright (c) Raegdan 2015. All rights reserved.
+ --------------------------------------------------------------

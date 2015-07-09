@@ -1,0 +1,12 @@
+## GSM-NDIS config.
+##
+## This is a part of the Project Shuppie.
+## License: GNU General Public License v3.
+## Copyright © Raegdan, 2015.
+## All rights reserved.
+## Email: raegdan-at-gmail-dot-com.
+
+config gsm 'default'
+	option apn 'apn.provider.tld'
+	option user 'johndoe'
+	option pass 'ilovejane'

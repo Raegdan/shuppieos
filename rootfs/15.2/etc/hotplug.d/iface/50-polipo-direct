@@ -1,0 +1,20 @@
+#!/bin/sh
+
+## Restarts direct access Polipo on status change of interfaces having "wan" or "vpn" (case-insens.) in their names.
+##
+## This is a part of the Project Shuppie.
+## License: GNU General Public License v3.
+## Copyright © Raegdan, 2015.
+## All rights reserved.
+## Email: raegdan-at-gmail-dot-com.
+
+[ "$ACTION" = ifup -o "$ACTION" = ifupdate -o "$ACTION" = ifdown ] || exit 0
+[ "$ACTION" = ifupdate -a -z "$IFUPDATE_ADDRESSES" -a -z "$IFUPDATE_DATA" ] && exit 0
+
+[ $( echo "$INTERFACE" | grep -iE "vpn|wan" ) ] || exit 0
+/etc/init.d/polipo-direct enabled || exit 0
+
+logger -t polipo-direct "Restarting direct access Polipo due to $ACTION of WAN iface $INTERFACE ($DEVICE)"
+/etc/init.d/polipo-direct stop
+/bin/sleep 1s
+/etc/init.d/polipo-direct start

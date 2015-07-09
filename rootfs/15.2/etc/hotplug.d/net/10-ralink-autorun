@@ -1,0 +1,23 @@
+#!/bin/sh
+
+## Reinitializes Wi-Fi when Ralink Wi-Fi dongle with non-standard driver (e.g. mt7601, 'raN' interface) is inserted.
+##
+## This is a part of the Project Shuppie.
+## License: GNU General Public License v3.
+## Copyright © Raegdan, 2015.
+## All rights reserved.
+## Email: raegdan-at-gmail-dot-com.
+
+LOGTAG="ralink-autorun"
+
+if [[ ! $( echo $INTERFACE | grep -e '^ra[0-9][0-9]*$' ) ]] ; then
+	logger -t $LOGTAG "I don't handle $INTERFACE -- skipping."
+	exit 0
+fi
+if [[ $ACTION != "add" ]] ; then
+        logger -t $LOGTAG "Action on $INTERFACE is $ACTION, not 'add' -- skipping."
+	exit 0
+fi
+
+logger -t $LOGTAG "Calling /sbin/wifi reload $INTERFACE."
+/sbin/wifi reload $INTERFACE

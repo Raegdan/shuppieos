@@ -1,0 +1,10 @@
+Package: kmod-mt7601
+Version: 3.18.11+3.0.0.4_20130913-1
+Depends: kernel (=3.18.11-1-e9b38b6b41d7ed326501b9bc6a4229b0), wireless-tools, hostapd-common-old
+Source: package/mt7601-openwrt
+License: GPL-2.0+
+Section: kernel
+Maintainer: Luca Olivetti <luca@ventoso.org>
+Architecture: brcm2708
+Installed-Size: 313761
+Description:  This package contains a driver for usb wireless adapters based on the mediatek MT7601U

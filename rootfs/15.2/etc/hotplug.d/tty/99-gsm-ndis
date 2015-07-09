@@ -1,0 +1,36 @@
+## GSM-NDIS: hotplug.d hook script that tries to establish GSM connection via USB2COM.
+##
+## This is a part of the Project Shuppie.
+## License: GNU General Public License v3.
+## Copyright © Raegdan, 2015.
+## All rights reserved.
+## Email: raegdan-at-gmail-dot-com.
+
+#exit 0
+
+fail() {
+	logger -t gsm-ndis "$@"
+	exit 0
+}
+
+if [[ ${ACTION} == "add" && $( echo ${DEVICENAME} | grep -e 'ttyUSB[0-9]' ) != "" ]] ; then
+	logger -t gsm-ndis "${DEVICENAME} appears on the horizon, trying to send dialing command there"
+
+	APN=$( uci get gsm.default.apn ) || fail "Can't retrieve GSM APN option from uci (gsm.default.apn) !"
+        USER=$( uci get gsm.default.user ) || fail "Can't retrieve GSM username option from uci (gsm.default.user) !"
+        PASS=$( uci get gsm.default.pass ) || fail "Can't retrieve GSM password option from uci (gsm.default.pass) !"
+
+	logger -t gsm-ndis "GSM parameters: APN $APN, username $USER, password $PASS."
+	logger -t gsm-ndis "Waiting 5s for modem init..."
+	sleep 5s
+
+        if [ -c /dev/${DEVICENAME} ] ; then
+	        echo -en 'AT^NDISDUP=1,1,"'$APN'","'$USER'","'$PASS'"\r\n' > /dev/${DEVICENAME}
+	        logger -t gsm-ndis "I sent dialing command to /dev/${DEVICENAME} and crossed my fingers."
+        else
+                logger -t gsm-ndis "Damnit! test -c failed on /dev/${DEVICENAME}! GSM-NDIS exits."
+                exit 0
+        fi
+else
+	logger -t gsm-ndis "Not my event, skipping: action: ${ACTION}, name: ${DEVICENAME}, path: ${DEVPATH}"
+fi

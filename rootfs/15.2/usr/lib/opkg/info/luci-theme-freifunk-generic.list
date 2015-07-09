@@ -1,0 +1,10 @@
+/www/luci-static/freifunk-generic/cascade.css
+/etc/uci-defaults/luci-theme-freifunk-generic
+/www/luci-static/freifunk-generic/bg.jpg
+/www/luci-static/freifunk-generic/smallscreen.css
+/www/luci-static/freifunk-generic/logo.jpg
+/www/luci-static/freifunk-generic/header.jpg
+/usr/lib/lua/luci/view/themes/freifunk-generic/header.htm
+/www/luci-static/freifunk-generic/ie7.css
+/usr/lib/lua/luci/view/themes/freifunk-generic/footer.htm
+/www/luci-static/freifunk-generic/mobile.css

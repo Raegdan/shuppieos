@@ -1,0 +1,22 @@
+#!/bin/sh
+
+## GSM-AT^RESET: Send AT^RESET command to a GSM modem to restart it on connectivity loss.
+##
+## This is a part of the Project Shuppie.
+## License: GNU General Public License v3.
+## Copyright © Raegdan, 2015.
+## All rights reserved.
+## Email: raegdan-at-gmail-dot-com.
+
+if [ -c /dev/ttyUSB0 ]; then
+    echo -en 'AT^RESET\r\n' > /dev/ttyUSB0
+    logger -t gsm-atreset "Sent AT^RESET to /dev/ttyUSB0"
+else
+    logger -t gsm-atreset "/dev/ttyUSB0 does not exist or not actually a TTY!"
+fi
+if [ -c /dev/ttyUSB1 ]; then
+    echo -en 'AT^RESET\r\n' > /dev/ttyUSB1
+    logger -t gsm-atreset "Sent AT^RESET to /dev/ttyUSB1"
+else
+    logger -t gsm-atreset "/dev/ttyUSB1 does not exist or not actually a TTY!"
+fi

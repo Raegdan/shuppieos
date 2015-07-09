@@ -1,0 +1,71 @@
+#!/bin/sh
+
+## Netkick: forces a network interface restart when connectivity loss detected.
+## Useful for wireless networks (GSM, Wi-Fi) when Shuppie user travels.
+##
+## This is a part of the Project Shuppie.
+## License: GNU General Public License v3.
+## Copyright © Raegdan, 2015.
+## All rights reserved.
+## Email: raegdan-at-gmail-dot-com.
+
+## IP address for finding the route of main Internet connectivity source.
+## OpenVPN gateway is a fine choice, as the system won't be confused by VPN routes.
+TESTING_IP="8.8.8.8"
+
+## GSM WAN interfaces (to be resetted with gsm-atreset) space delimited:
+ATRESET="wwan0"
+
+## Wi-Fi WAN interfaces (to be resetted with wifi reload) space delimited:
+WIFIRELOAD="ra0"
+
+## Blacklist: interfaces to be NEVER resetted:
+BLACKLIST="tun0 wlan0 br-lan"
+
+FALLBACK="wwan0"
+
+LOCKTIME="30s"
+
+## C O D E ##
+IFACE=$( ip route get $TESTING_IP | grep -oe "dev [0-9A-Za-z][0-9A-Za-z]*" | sed "s/dev\ //g" )
+
+if [ -z $IFACE ] ; then
+        logger -t netkick "Cannot determine main interface (tested against: \"$TESTING_IP\"), assuming fallback $FALLBACK"
+        #exit 0
+        IFACE=$FALLBACK
+fi
+
+logger -t netkick "Netkick: Main interface is $IFACE (tested against: \"$TESTING_IP\")"
+
+if [ -e /tmp/netkick.$IFACE.lock ] ; then
+	logger -t netkick "Lock for $IFACE has not expired yet. This instance of netkick exits now."
+	exit 0
+fi
+
+for i in $BLACKLIST ; do
+        if [ $IFACE = $i ] ; then
+                logger -t netkick "$IFACE is in netkick blacklist, exiting."
+                exit 0
+        fi
+done
+
+for i in $ATRESET ; do
+	if [ $IFACE = $i ] ; then
+		logger -t netkick "$IFACE is subject for AT^RESET, executing now."
+		/usr/sbin/gsm-atreset
+                ## GSM modem takes long to boot, so overriding lock time
+                LOCKTIME="60s"
+	fi
+done
+
+for i in $WIFIRELOAD ; do
+        if [ $IFACE = $i ] ; then
+                logger -t netkick "$IFACE is subject for /sbin/wifi reload, executing now."
+                /sbin/wifi reload $IFACE
+        fi
+done
+
+logger -t netkick "Locking further $IFACE kicking for $LOCKTIME."
+/bin/touch /tmp/netkick.$IFACE.lock
+/bin/sleep $LOCKTIME
+/bin/rm -f /tmp/netkick.$IFACE.lock
